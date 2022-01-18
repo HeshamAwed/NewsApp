@@ -18,7 +18,7 @@ jobs:
           distribution: 'temurin'
           java-version: 11
       - name: check code style
-        run: chmod +x ./gradlew --continue ktlintCheck
+        run: ./gradlew --continue ktlintCheck
       - name: build for debug
         if:
-        run: chmod +x ./gradlew assembleDebug appDistributionUploadDebug
+        run: ./gradlew assembleDebug appDistributionUploadDebug
