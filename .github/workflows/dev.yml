@@ -17,8 +17,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 11
-      - name: format code
-        run: chmod +x ./gradlew ktlintFormat
       - name: check code style
         run: chmod +x ./gradlew --continue ktlintCheck
       - name: build for debug
