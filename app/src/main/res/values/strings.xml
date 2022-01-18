@@ -2,5 +2,19 @@
     <string name="app_name">NewsApp</string>
     <string name="something_went_wrong_please_try_again">Something went wrong please try again</string>
     <string name="there_is_no_data">There is no data</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="retry">Retry</string>
+
+    <!--error message-->
+    <string name="text_title_internet_connection">Check internet connection</string>
+    <string name="text_sub_title_internet_connection">Your internet seems to be disconnected, please check internet connection</string>
+    <string name="unknown_error">Something error, please try again later</string>
+    <string name="text_sorry">"Sorry!"</string>
+    <string name="article_details">Article Details</string>
+    <string name="search_for_news">Search for news</string>
+    <string name="article_added_to_favorites">The article added to favorites</string>
 
 </resources>

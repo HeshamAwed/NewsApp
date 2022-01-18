@@ -11,12 +11,20 @@ interface AppGateway {
         const val apiPath = ""
     }
 
+    @GET("top-headlines")
+    suspend fun getBreakingNews(
+        @Query("country")
+        countryCode: String = "eg",
+        @Query("page")
+        pageNumber: Int
+    ): ArticlesResponse
 
-    @GET("everything?sortBy=publishedAt")
-    fun getArticles(
-        @Query("q") keyword: String,
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int,
-       // @Header("X-Api-Key") apiKey: String
-    ): Call<ArticlesResponse>
+
+    @GET("everything")
+    suspend fun searchNews(
+        @Query("q")
+        searchQuery: String,
+        @Query("page")
+        pageNumber: Int
+    ): ArticlesResponse
 }

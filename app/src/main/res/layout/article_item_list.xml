@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,58 +10,65 @@
             type="com.hesham.newsapp.domain.entities.Article" />
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/leftGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/rightGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars"
+                app:imageUrl="@{article.urlToImage}"/>
 
             <TextView
                 android:id="@+id/titleTextView"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:maxLines="2"
                 android:text="@{article.title}"
                 app:layout_constrainedHeight="true"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toRightOf="@id/rightGuideline"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="Article title" />
 
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{article.description}"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toTopOf="@id/separatorView"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toRightOf="@id/rightGuideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView"
                 tools:text="Article description" />
 
@@ -68,12 +76,12 @@
                 android:id="@+id/separatorView"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@id/publishedAtTextView"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toRightOf="@id/rightGuideline"
+                android:layout_marginEnd="16dp"
+                android:background="@color/colorTextSecondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descriptionTextView" />
 
             <TextView
@@ -85,41 +93,51 @@
                 android:textSize="12sp"
                 app:layout_constrainedHeight="true"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toLeftOf="@id/clockImageView"
-                app:layout_constraintTop_toBottomOf="@id/separatorView"
+                app:layout_constraintBottom_toBottomOf="@+id/publishedAtTextView"
+                app:layout_constraintStart_toStartOf="@+id/separatorView"
+                app:layout_constraintTop_toTopOf="@+id/publishedAtTextView"
                 tools:text="android.com" />
 
             <TextView
                 android:id="@+id/publishedAtTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{article.getPublishDate()}"
                 android:textSize="12sp"
                 android:textStyle="italic"
                 app:layout_constrainedHeight="true"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toRightOf="@id/rightGuideline"
-                app:layout_constraintTop_toBottomOf="@id/separatorView"
-                android:text="@{article.publishedAt}"
+                app:layout_constraintEnd_toEndOf="@+id/separatorView"
+                app:layout_constraintTop_toBottomOf="@+id/separatorView"
                 tools:text="10:48 on 10/02/2018" />
 
             <ImageView
                 android:id="@+id/clockImageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@android:drawable/ic_menu_day"
-                app:layout_constraintBottom_toBottomOf="@id/publishedAtTextView"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_date"
+                app:layout_constraintBottom_toBottomOf="@+id/publishedAtTextView"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintHorizontal_bias="0.98"
-                app:layout_constraintLeft_toLeftOf="@id/leftGuideline"
-                app:layout_constraintRight_toLeftOf="@id/publishedAtTextView"
+                app:layout_constraintEnd_toStartOf="@+id/publishedAtTextView"
                 app:layout_constraintTop_toTopOf="@id/publishedAtTextView"
+                app:layout_constraintVertical_bias="1.0"
                 app:layout_constraintWidth_percent="0.05" />
+
+            <ImageButton
+                android:id="@+id/btn_favorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/favorit_button_border"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                android:src="@drawable/ic_favorite_border" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

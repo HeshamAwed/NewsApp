@@ -24,12 +24,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_API_URL", "\"https://newsapi.org/v2/\"")
-            buildConfigField("String", "MY_API_KEY", "\"baf6cd02ffcd412f87c4a57e1df2dd0a\"")
+            buildConfigField("String", "MY_API_KEY", "\"6ce85f68ba87400a864c7b4d10c07065\"")
         }
         debug {
             debuggable true
             buildConfigField("String", "BASE_API_URL", "\"https://newsapi.org/v2/\"")
-            buildConfigField("String", "MY_API_KEY", "\"baf6cd02ffcd412f87c4a57e1df2dd0a\"")
+            buildConfigField("String", "MY_API_KEY", "\"6ce85f68ba87400a864c7b4d10c07065\"")
         }
     }
     compileOptions {
@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        viewBinding true
     }
 }
 
@@ -80,11 +81,15 @@ dependencies {
     implementation "io.insert-koin:koin-core:3.1.4"
     testImplementation "io.insert-koin:koin-test:3.1.4"
     implementation "io.insert-koin:koin-android:3.1.4"
+    implementation "com.github.geniusforapp:fancyDialog:1.0.2"
 
 
     // glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation "io.coil-kt:coil:1.4.0"
+    implementation "joda-time:joda-time:2.10.6"
+
 
     // moshi
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"

@@ -1,20 +1,31 @@
 package com.hesham.newsapp.di
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.hesham.newsapp.BuildConfig
+import com.hesham.newsapp.application.NewsApplication.Companion.context
+import com.hesham.newsapp.domain.datasources.ArticleDataSource
+import com.hesham.newsapp.domain.datasources.SearchArticleDataSource
 import com.hesham.newsapp.domain.gateway.local.db.AppDatabase
 import com.hesham.newsapp.domain.gateway.remote.AppGateway
 import com.hesham.newsapp.domain.gateway.remote.HeaderInterceptor
+import com.hesham.newsapp.domain.repositories.ArticleRepository
+import com.hesham.newsapp.domain.repositories.ArticleRepositoryImpl
+import com.hesham.newsapp.ui.articles.details.DetailsViewModel
+import com.hesham.newsapp.ui.articles.favorites.FavoritesViewModel
+import com.hesham.newsapp.ui.articles.home.HomeViewModel
+import com.hesham.newsapp.ui.articles.search.SearchViewModel
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import org.koin.androidx.viewmodel.dsl.viewModel
 
 enum class DependencyInjection {
     APP_CLIENT,
@@ -47,7 +58,7 @@ val appGatewayModule = module {
 
     single<AppGateway>(named(DependencyInjection.APP_RETROFIT)) {
         Retrofit.Builder()
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BuildConfig.BASE_API_URL)
             .client(get(named(DependencyInjection.APP_CLIENT)))
@@ -58,23 +69,29 @@ val appGatewayModule = module {
 
 val repositoriesModule = module {
 
-//    single<StoresRepository> {
-//        StoresRepositoryImplementation(
-//            get()
-//        )
-//    }
+    single<ArticleRepository> {
+        ArticleRepositoryImpl(
+            get(named(DependencyInjection.APP_RETROFIT)),
+            get()
+        )
+    }
 
 
 }
 
 val dataSources = module {
 
-//    single<CategoriesDataSource> {
-//        CategoriesDataSourceImplementation(
-//            get(),
-//            get(named(ON_MARKET_RETROFIT))
-//        )
-//    }
+    single {
+        ArticleDataSource(
+            get(named(DependencyInjection.APP_RETROFIT))
+        )
+    }
+    single {
+        SearchArticleDataSource(
+            get(named(DependencyInjection.APP_RETROFIT)),
+            ""
+        )
+    }
 
 }
 
@@ -84,12 +101,16 @@ val useCasesModule = module {
 }
 
 val viewModelsModule = module{
+    viewModel { HomeViewModel(get()) }
+    viewModel { FavoritesViewModel(get()) }
+    viewModel { SearchViewModel(get(),get()) }
+    viewModel { DetailsViewModel() }
 
 }
 
 val databaseModule = module {
     single {
-        Room.databaseBuilder(get(), AppDatabase::class.java, "articles_database")
+        Room.databaseBuilder(context, AppDatabase::class.java, "articles_database")
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
@@ -99,10 +120,10 @@ val databaseModule = module {
 
 val applicationModules = listOf(
     applicationModule,
+    databaseModule,
     appGatewayModule,
     repositoriesModule,
     dataSources,
     useCasesModule,
-    databaseModule,
     viewModelsModule
 )
