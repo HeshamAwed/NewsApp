@@ -1,14 +1,16 @@
 package com.hesham.newsapp.domain.entities
-import kotlinx.android.parcel.Parcelize
+
 import android.os.Parcelable
 import androidx.room.TypeConverter
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import org.json.JSONObject
 
 @Parcelize
-data class Source (
+data class Source(
     @SerializedName("name")
-    val name:String): Parcelable
+    val name: String
+) : Parcelable
 
 
 class SourceTypeConverter {
@@ -22,6 +24,6 @@ class SourceTypeConverter {
     @TypeConverter
     fun toSource(source: String): Source {
         val json = JSONObject(source)
-        return Source( json.getString("name"))
+        return Source(json.getString("name"))
     }
 }

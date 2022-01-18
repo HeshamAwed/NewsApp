@@ -1,7 +1,6 @@
 package com.hesham.newsapp.ui.articles.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,11 @@ class HomeFragment : Fragment() {
         findNavController().navigate(action)
     }, addToFavorite = {
         homeViewModel.addArticleToFavorite(it)
-        Toast.makeText(requireContext(), getString(R.string.article_added_to_favorites), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.article_added_to_favorites),
+            Toast.LENGTH_SHORT
+        ).show()
     })
 
     override fun onCreateView(
@@ -51,21 +54,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun initObservers() {
-        homeViewModel.errorMessage.observe(viewLifecycleOwner,{
-           showError(it)
+        homeViewModel.errorMessage.observe(viewLifecycleOwner, {
+            showError(it)
         })
 
-        homeViewModel.isLoading.observe(viewLifecycleOwner,{
+        homeViewModel.isLoading.observe(viewLifecycleOwner, {
             binding.articlesProgressBar.isVisible = it
         })
-        homeViewModel.isEmptyList.observe(viewLifecycleOwner,{
+        homeViewModel.isEmptyList.observe(viewLifecycleOwner, {
             binding.textEmpty.isVisible = it
         })
     }
 
 
     private fun initAdapters() {
-        val loadStateAdapter = ArticleLoadStateAdapter{articlesAdapter.retry()}
+        val loadStateAdapter = ArticleLoadStateAdapter { articlesAdapter.retry() }
         binding.rvArticles.adapter = articlesAdapter.withLoadStateFooter(loadStateAdapter)
         articlesAdapter.addLoadStateListener {
             homeViewModel.handleLoadStates(it, articlesAdapter.itemCount)
@@ -79,6 +82,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

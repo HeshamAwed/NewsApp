@@ -1,6 +1,5 @@
 package com.hesham.newsapp.ui.kts
 
-import okhttp3.internal.UTC
 import org.joda.time.format.DateTimeFormat
 import java.text.SimpleDateFormat
 import java.util.*

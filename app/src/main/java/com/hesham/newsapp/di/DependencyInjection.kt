@@ -1,6 +1,5 @@
 package com.hesham.newsapp.di
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -20,12 +19,12 @@ import com.hesham.newsapp.ui.articles.search.SearchViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import org.koin.androidx.viewmodel.dsl.viewModel
 
 enum class DependencyInjection {
     APP_CLIENT,
@@ -75,12 +74,9 @@ val repositoriesModule = module {
             get()
         )
     }
-
-
 }
 
 val dataSources = module {
-
     single {
         ArticleDataSource(
             get(named(DependencyInjection.APP_RETROFIT))
@@ -92,20 +88,13 @@ val dataSources = module {
             ""
         )
     }
-
 }
 
-val useCasesModule = module {
-//    single { InitConfigUseCase(get()) }
-
-}
-
-val viewModelsModule = module{
+val viewModelsModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { FavoritesViewModel(get()) }
-    viewModel { SearchViewModel(get(),get()) }
+    viewModel { SearchViewModel(get(), get()) }
     viewModel { DetailsViewModel() }
-
 }
 
 val databaseModule = module {
@@ -124,6 +113,5 @@ val applicationModules = listOf(
     appGatewayModule,
     repositoriesModule,
     dataSources,
-    useCasesModule,
     viewModelsModule
 )

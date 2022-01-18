@@ -1,4 +1,5 @@
 package com.hesham.newsapp.domain.entities
+
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,7 +14,7 @@ data class Article(
     @SerializedName("title")
     val title: String,
     @SerializedName("author")
-    val author:String?,
+    val author: String?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("source")
@@ -27,9 +28,9 @@ data class Article(
     @SerializedName("content")
     val content: String?,
     @SerializedName("isFavorite")
-    val isFavorite:Boolean = false
-):Parcelable{
-    fun getPublishDate():String?{
+    val isFavorite: Boolean = false
+) : Parcelable {
+    fun getPublishDate(): String? {
         return publishedAt?.formatToDisplayDateAndTime()
     }
 }

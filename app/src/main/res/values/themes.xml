@@ -31,9 +31,4 @@
         <item name="fontFamily">@font/semibold</item>
     </style>
 
-    <style name="subtitleTextAppearance" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/colorTextSecondary</item>
-        <item name="android:textSize">13sp</item>
-        <item name="fontFamily">@font/semibold</item>
-    </style>
 </resources>

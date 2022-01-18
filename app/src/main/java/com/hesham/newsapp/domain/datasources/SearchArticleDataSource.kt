@@ -9,7 +9,8 @@ import java.io.IOException
 import java.net.UnknownHostException
 
 
-class SearchArticleDataSource(val appGateway: AppGateway,val query: String) : PagingSource<Int, Article>() {
+class SearchArticleDataSource(val appGateway: AppGateway, val query: String) :
+    PagingSource<Int, Article>() {
 
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -31,9 +32,9 @@ class SearchArticleDataSource(val appGateway: AppGateway,val query: String) : Pa
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
-        }catch (exception: Exception) {
+        } catch (exception: Exception) {
             return LoadResult.Error(exception)
-        }catch (exception: UnknownHostException) {
+        } catch (exception: UnknownHostException) {
             return LoadResult.Error(exception)
         }
     }

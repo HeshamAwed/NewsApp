@@ -13,6 +13,7 @@ class NewsApplication : Application() {
             return context
         }
     }
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

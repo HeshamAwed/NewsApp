@@ -31,9 +31,9 @@ class ArticleDataSource(val appGateway: AppGateway) : PagingSource<Int, Article>
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
-        }catch (exception: Exception) {
+        } catch (exception: Exception) {
             return LoadResult.Error(exception)
-        }catch (exception: UnknownHostException) {
+        } catch (exception: UnknownHostException) {
             return LoadResult.Error(exception)
         }
     }

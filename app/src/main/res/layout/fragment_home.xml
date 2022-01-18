@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -11,25 +12,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/article_item_list"
-            tools:itemCount="10" />
+            tools:itemCount="10"
+            tools:listitem="@layout/article_item_list" />
 
         <ProgressBar
             android:id="@+id/articles_progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_empty"
+            style="@style/titleTextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/there_is_no_data"
-            style="@style/titleTextAppearance"
-            android:visibility="invisible"
-            android:layout_gravity="center"/>
+            android:visibility="invisible" />
 
     </FrameLayout>
 </layout>

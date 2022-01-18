@@ -23,11 +23,13 @@ class ArticleLoadStateAdapter(private val retry: () -> Unit) :
     /**
      * view holder class for footer loader and error state handling
      */
-    class LoaderViewHolder(val binding: ArticleLoadStateItemBinding, retry: () -> Unit) : RecyclerView.ViewHolder(binding.root) {
+    class LoaderViewHolder(val binding: ArticleLoadStateItemBinding, retry: () -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.btnRetry.setOnClickListener { retry.invoke() }
         }
+
         companion object {
             // get instance of the DoggoImageViewHolder
             fun create(parent: ViewGroup, retry: () -> Unit): LoaderViewHolder {

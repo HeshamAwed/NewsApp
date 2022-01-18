@@ -1,21 +1,18 @@
 package com.hesham.newsapp.ui.articles.details
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebViewClient
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.hesham.newsapp.R
 import com.hesham.newsapp.databinding.DetailsFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
 
 
-    private  val  detailsViewModel: DetailsViewModel by viewModel()
+    private val detailsViewModel: DetailsViewModel by viewModel()
     private val args: DetailsFragmentArgs by navArgs()
 
     private var _binding: DetailsFragmentBinding? = null

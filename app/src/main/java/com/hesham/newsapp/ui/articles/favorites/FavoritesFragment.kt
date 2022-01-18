@@ -44,16 +44,16 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun initObservers() {
-        favoritesViewModel.getAllFavorites().observe(viewLifecycleOwner,{
+        favoritesViewModel.getAllFavorites().observe(viewLifecycleOwner, {
             binding.textEmpty.isVisible = it.isEmpty()
-            Log.e("Hesham",it.toString()+" ")
+            Log.e("Hesham", it.toString() + " ")
             articlesAdapter.submitList(it)
             articlesAdapter.notifyDataSetChanged()
         })
-        favoritesViewModel.errorMessage.observe(viewLifecycleOwner,{
+        favoritesViewModel.errorMessage.observe(viewLifecycleOwner, {
             showError(it)
         })
-       // favoritesViewModel.getAllFavorites()
+        // favoritesViewModel.getAllFavorites()
     }
 
     override fun onDestroyView() {

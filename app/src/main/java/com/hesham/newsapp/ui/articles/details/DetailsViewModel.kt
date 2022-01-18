@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 import com.hesham.newsapp.domain.entities.Article
 
 class DetailsViewModel : ViewModel() {
-   val article = MutableLiveData<Article>()
+    val article = MutableLiveData<Article>()
 }

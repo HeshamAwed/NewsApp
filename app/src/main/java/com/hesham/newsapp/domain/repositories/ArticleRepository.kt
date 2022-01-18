@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
     fun getBreakingNews(): Flow<PagingData<Article>>
-    fun searchNews(query:String): Flow<PagingData<Article>>
-    fun getAllFavoriteArticles():LiveData<List<Article>>
+    fun searchNews(query: String): Flow<PagingData<Article>>
+    fun getAllFavoriteArticles(): LiveData<List<Article>>
     fun addArticleToFavorite(article: Article)
-  suspend  fun deleteArticleFromFavorite(article: Article)
+    suspend fun deleteArticleFromFavorite(article: Article)
 }
 
 class ArticleRepositoryImpl(
@@ -39,12 +39,12 @@ class ArticleRepositoryImpl(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { SearchArticleDataSource(appGateway,query) }
+            pagingSourceFactory = { SearchArticleDataSource(appGateway, query) }
         ).flow
     }
 
-    override  fun getAllFavoriteArticles(): LiveData<List<Article>> {
-       return articleDao.getFavoritesArticles()
+    override fun getAllFavoriteArticles(): LiveData<List<Article>> {
+        return articleDao.getFavoritesArticles()
     }
 
     override fun addArticleToFavorite(article: Article) {

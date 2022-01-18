@@ -29,6 +29,7 @@ fun bindViewGone(view: View, b: Boolean) {
     if (b) view.visibility = View.VISIBLE
     else view.visibility = View.GONE
 }
+
 @BindingAdapter("isFavorite")
 fun bindIsFavorite(view: ImageButton, b: Boolean) {
     if (b) view.setImageResource(R.drawable.ic_favorite)

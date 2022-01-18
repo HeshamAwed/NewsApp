@@ -1,12 +1,9 @@
 package com.hesham.newsapp.ui.kts
 
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.fragment.app.Fragment
-import com.hesham.newsapp.R
 import com.geniusforapp.fancydialog.builders.FancyDialogBuilder
+import com.hesham.newsapp.R
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

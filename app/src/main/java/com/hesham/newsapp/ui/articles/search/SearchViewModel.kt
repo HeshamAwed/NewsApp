@@ -1,6 +1,8 @@
 package com.hesham.newsapp.ui.articles.search
 
-import androidx.lifecycle.*
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.hesham.newsapp.domain.entities.Article
@@ -8,7 +10,8 @@ import com.hesham.newsapp.domain.repositories.ArticleRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val articleRepository: ArticleRepository,    private val savedStateHandle: SavedStateHandle
+class SearchViewModel(
+    private val articleRepository: ArticleRepository, private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val state: StateFlow<UiState>
 
@@ -65,7 +68,7 @@ class SearchViewModel(private val articleRepository: ArticleRepository,    priva
         super.onCleared()
     }
 
-    fun  addArticleToFavorite(article: Article)= articleRepository.addArticleToFavorite(article)
+    fun addArticleToFavorite(article: Article) = articleRepository.addArticleToFavorite(article)
 
     private fun searchNews(queryString: String): Flow<PagingData<Article>> =
         articleRepository.searchNews(queryString)

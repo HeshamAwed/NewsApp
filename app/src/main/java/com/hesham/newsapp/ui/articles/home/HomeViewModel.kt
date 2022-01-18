@@ -1,6 +1,5 @@
 package com.hesham.newsapp.ui.articles.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,11 +7,9 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.hesham.newsapp.application.launchDataLoad
 import com.hesham.newsapp.domain.entities.Article
 import com.hesham.newsapp.domain.repositories.ArticleRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val articleRepository: ArticleRepository) : ViewModel() {
@@ -20,8 +17,8 @@ class HomeViewModel(private val articleRepository: ArticleRepository) : ViewMode
     val isLoading = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<Throwable>()
 
-    fun getBreakingArticles() :Flow<PagingData<Article>>{
-      return  articleRepository.getBreakingNews().cachedIn(viewModelScope)
+    fun getBreakingArticles(): Flow<PagingData<Article>> {
+        return articleRepository.getBreakingNews().cachedIn(viewModelScope)
     }
 
     fun handleLoadStates(combinedLoadStates: CombinedLoadStates, itemCount: Int) {
@@ -55,6 +52,6 @@ class HomeViewModel(private val articleRepository: ArticleRepository) : ViewMode
         }
     }
 
-    fun  addArticleToFavorite(article: Article)= articleRepository.addArticleToFavorite(article)
+    fun addArticleToFavorite(article: Article) = articleRepository.addArticleToFavorite(article)
 
 }

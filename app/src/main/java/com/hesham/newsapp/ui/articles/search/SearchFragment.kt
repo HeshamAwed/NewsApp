@@ -1,17 +1,13 @@
 package com.hesham.newsapp.ui.articles.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -21,8 +17,6 @@ import com.hesham.newsapp.R
 import com.hesham.newsapp.databinding.FragmentSearchBinding
 import com.hesham.newsapp.domain.entities.Article
 import com.hesham.newsapp.ui.articles.adapters.ArticlesAdapter
-import com.hesham.newsapp.ui.articles.favorites.FavoritesArticlesAdapter
-import com.hesham.newsapp.ui.articles.home.HomeFragmentDirections
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -42,7 +36,7 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        searchViewModel =  getViewModel(){ parametersOf(this) }
+        searchViewModel = getViewModel() { parametersOf(this) }
         binding.bindState(
             uiState = searchViewModel.state,
             pagingData = searchViewModel.pagingDataFlow,
@@ -61,7 +55,11 @@ class SearchFragment : Fragment() {
             findNavController().navigate(action)
         }, addToFavorite = {
             searchViewModel.addArticleToFavorite(it)
-            Toast.makeText(requireContext(), getString(R.string.article_added_to_favorites), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.article_added_to_favorites),
+                Toast.LENGTH_SHORT
+            ).show()
         })
         rvArticles.adapter = articlesAdapter
 
@@ -121,7 +119,7 @@ class SearchFragment : Fragment() {
         uiState: StateFlow<UiState>,
         pagingData: Flow<PagingData<Article>>,
         onScrollChanged: (UiAction.Scroll) -> Unit
-    )   {
+    ) {
         rvArticles.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy != 0) onScrollChanged(UiAction.Scroll(currentQuery = uiState.value.query))

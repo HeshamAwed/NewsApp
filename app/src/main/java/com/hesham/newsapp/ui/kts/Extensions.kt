@@ -6,12 +6,9 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hesham.newsapp.R
 import com.hesham.newsapp.application.NewsApplication.Companion.context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 fun ViewModel.launchDataLoad(
     execution: suspend CoroutineScope.() -> Unit,
