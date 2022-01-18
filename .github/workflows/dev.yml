@@ -1,0 +1,26 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 11
+      - name: format code
+        run: ./gradlew ktlintFormat
+      - name: check code style
+        run: ./gradlew --continue ktlintCheck
+      - name: build for debug
+        if:
+        run: ./gradlew assembleDebug appDistributionUploadDebug
